@@ -1,8 +1,10 @@
 ﻿namespace Simulator;
 
-public class Creature
+public abstract class Creature
 {
     private string name = "Unknown";
+
+    public abstract int Power { get; }
     public string Name
     {
         get => name;
@@ -73,7 +75,7 @@ public class Creature
 
     public string Info => $"{Name} [{Level}]";
 
-    public void SayHi() => Console.WriteLine($"Hi, I'm {Name}, my level is {Level}.");
+    public abstract void SayHi();
 
     public void Upgrade()
     {
