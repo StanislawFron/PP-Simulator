@@ -8,61 +8,15 @@ public abstract class Creature
     public string Name
     {
         get => name;
-        init
-        {
-            var trimmedValue = value.Trim();
+        init => name = Validator.Shortener(value, 3, 25, '#');
 
-            if (trimmedValue.Length < 3)
-            {
-                for (int i = trimmedValue.Length; i < 3; i++)
-                {
-                    trimmedValue += "#";
-                }
-            }
-
-            if (trimmedValue.Length > 25)
-            {
-                trimmedValue = trimmedValue.Substring(0, 25);
-            }
-
-            trimmedValue = trimmedValue.Trim();
-
-            if (trimmedValue.Length < 3)
-            {
-                for (int i = trimmedValue.Length; i < 3; i++)
-                {
-                    trimmedValue += "#";
-                }
-            }
-
-            if (char.IsLower(trimmedValue[0]))
-            {
-                trimmedValue = char.ToUpper(trimmedValue[0]) + trimmedValue.Substring(1);
-            }
-
-            name = trimmedValue;
-        }
     }
 
     private int level = 1;
     public int Level
     {
         get => level;
-        init 
-        {
-            if (value < 1)
-            {
-                level = 1;
-            }
-            else if (value > 10)
-            {
-                level = 10;
-            }
-            else
-            {
-                level = value;
-            }
-        }
+        init => level = Validator.Limiter(value, 1, 10);
     }
 
     public Creature(string name, int level = 1)
@@ -73,7 +27,7 @@ public abstract class Creature
 
     public Creature() { }
 
-    public string Info => $"{Name} [{Level}]";
+    public abstract string Info { get; }
 
     public abstract void SayHi();
 
@@ -99,4 +53,6 @@ public abstract class Creature
     {
         Go(DirectionParser.Parse(directions));
     }
+
+    public override string ToString() => $"{GetType().Name.ToUpper()}: {Info}";
 }

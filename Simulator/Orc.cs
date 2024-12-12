@@ -7,10 +7,10 @@ public class Orc : Creature
     public int Rage
     {
         get => rage;
-        init => rage = value < 0 ? 1 : value > 10 ? 10 : value;
+        init => rage = Validator.Limiter(value, 0, 10);
     }
 
-    public Orc(string name, int level = 1, int rage = 1) : base(name, level)
+    public Orc(string name, int level, int rage) : base(name, level)
     {
         Rage = rage;
     }
@@ -33,4 +33,6 @@ public class Orc : Creature
     );
 
     public override int Power => 7 * Level + 3 * Rage;
+
+    public override string Info => $"{Name} [{Level}][{Rage}]";
 }
