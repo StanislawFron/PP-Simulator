@@ -1,6 +1,7 @@
-﻿using Simulator.Maps;
+﻿namespace Runner;
 
-namespace Simulator;
+using global::Simulator;
+using Simulator.Maps;
 
 internal class Program
 {
