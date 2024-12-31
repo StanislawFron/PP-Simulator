@@ -1,4 +1,6 @@
-﻿namespace Simulator;
+﻿using Simulator.Maps;
+
+namespace Simulator;
 
 internal class Program
 {
@@ -6,6 +8,7 @@ internal class Program
     {
         Console.WriteLine("Starting Simulator!\n");
         Lab5a();
+        Lab5b();
     }
 
     static void Lab5a()
@@ -48,5 +51,59 @@ internal class Program
         Point p2 = new Point(4, 5);
         Rectangle rect3 = new Rectangle(p1, p2);
         Console.WriteLine(rect3); // Oczekiwany: (1, 2):(4, 5)
+    }
+
+    static void Lab5b()
+    {
+        Console.WriteLine("=== Testy klasy SmallSquareMap ===");
+
+        // Test 1: Poprawne utworzenie mapy
+        var map = new SmallSquareMap(10);
+        Console.WriteLine($"Rozmiar mapy: {map.Size}"); // Oczekiwany wynik: 10
+
+        // Test 2: Punkt startowy i ruch w górę
+        var start = new Point(5, 5);
+        Console.WriteLine($"Punkt startowy: {start}"); // Oczekiwany wynik: (5, 5)
+
+        var nextUp = map.Next(start, Direction.Up);
+        Console.WriteLine($"Ruch w górę: {nextUp}"); // Oczekiwany wynik: (5, 6)
+
+        var nextRight = map.Next(start, Direction.Right);
+        Console.WriteLine($"Ruch w prawo: {nextRight}"); // Oczekiwany wynik: (6, 5)
+
+        // Test 3: Próba wyjścia poza mapę
+        var outOfBounds = map.Next(new Point(0, 0), Direction.Left);
+        Console.WriteLine($"Próba ruchu w lewo z (0, 0): {outOfBounds}"); // Oczekiwany wynik: (0, 0)
+
+        var diagonalOutOfBounds = map.NextDiagonal(new Point(0, 0), Direction.Left);
+        Console.WriteLine($"Próba ruchu diagonalnego w lewo z (0, 0): {diagonalOutOfBounds}"); // Oczekiwany wynik: (0, 0)
+
+        // Test 4: Próba utworzenia mapy o zbyt małym rozmiarze
+        try
+        {
+            var tooSmallMap = new SmallSquareMap(3);
+            Console.WriteLine($"Nieoczekiwany wynik: mapa o rozmiarze {tooSmallMap.Size}");
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            Console.WriteLine($"Poprawnie zgłoszony błąd dla zbyt małej mapy: {ex.Message}");
+        }
+
+        // Test 5: Próba utworzenia mapy o zbyt dużym rozmiarze
+        try
+        {
+            var tooLargeMap = new SmallSquareMap(25);
+            Console.WriteLine($"Nieoczekiwany wynik: mapa o rozmiarze {tooLargeMap.Size}");
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            Console.WriteLine($"Poprawnie zgłoszony błąd dla zbyt dużej mapy: {ex.Message}");
+        }
+
+        // Test 6: Próba sprawdzenia nieistniejącego punktu
+        var invalidPoint = new Point(-1, -1);
+        Console.WriteLine($"Punkt {invalidPoint} istnieje na mapie: {map.Exist(invalidPoint)}"); // Oczekiwany wynik: false
+
+        Console.WriteLine("=== Testy zakończone ===");
     }
 }
