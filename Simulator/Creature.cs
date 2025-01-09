@@ -1,8 +1,12 @@
-﻿namespace Simulator;
+﻿using Simulator.Maps;
+
+namespace Simulator;
 
 public abstract class Creature
 {
     private string name = "Unknown";
+    private Map? currentMap;
+    private Point? position;
 
     public abstract int Power { get; }
     public string Name
@@ -39,13 +43,27 @@ public abstract class Creature
         }
     }
 
-    public string Go(Direction direction) => $"{Name} goes {direction.ToString().ToLower()}";
-
-    public string[] Go(Direction[] directions) =>
-        directions.Select(direction => Go(direction)).ToArray();
-
-    public string[] Go(string directions) =>
-        Go(DirectionParser.Parse(directions));
-
     public override string ToString() => $"{GetType().Name.ToUpper()}: {Info}";
+
+    public void AddToMap(Map map, Point startPosition)
+    {
+        currentMap = map;
+        position = startPosition;
+        currentMap.Add(this, startPosition); // Dodaj stworzenie na mapę
+    }
+
+    public void Go(Direction direction)
+    {
+        if (currentMap == null || position == null)
+        {
+            throw new InvalidOperationException("Blad! - Stwor nie ma jeszcze przydzielonej mapy.");
+        }
+
+        var nextPosition = currentMap.Next(position.Value, direction);
+        if (currentMap.Exist(nextPosition))
+        {
+            currentMap.Move(this, position.Value, nextPosition);
+            position = nextPosition;
+        }
+    }
 }

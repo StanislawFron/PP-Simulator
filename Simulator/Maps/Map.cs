@@ -45,4 +45,14 @@ public abstract class Map
     /// <param name="d">Direction.</param>
     /// <returns>Next point.</returns>
     public abstract Point NextDiagonal(Point p, Direction d);
+
+    public abstract void Add(Creature creature, Point point);
+
+    public void Move(Creature creature, Point pos, Point nextpos)
+    {
+        Remove(creature, pos);
+        Add(creature, nextpos);
+    }
+
+    public abstract void Remove(Creature creature, Point point);
 }
