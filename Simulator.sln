@@ -5,9 +5,14 @@ VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simulator", "Simulator\Simulator.csproj", "{EE13F478-CEA5-499D-B275-3934BC2F345D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runner", "Runner\Runner.csproj", "{FD16059A-DD50-4C36-AAE7-8552F7D4F695}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runner", "Runner\Runner.csproj", "{FD16059A-DD50-4C36-AAE7-8552F7D4F695}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSimulator", "TestSimulator\TestSimulator.csproj", "{4C561ED3-0243-4C06-91F9-E0B1425B7B2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSimulator", "TestSimulator\TestSimulator.csproj", "{4C561ED3-0243-4C06-91F9-E0B1425B7B2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimConsole", "SimConsole\SimConsole.csproj", "{E37944B1-5A9A-45C6-AE84-7A9E46D1A114}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EE13F478-CEA5-499D-B275-3934BC2F345D} = {EE13F478-CEA5-499D-B275-3934BC2F345D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +32,10 @@ Global
 		{4C561ED3-0243-4C06-91F9-E0B1425B7B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C561ED3-0243-4C06-91F9-E0B1425B7B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C561ED3-0243-4C06-91F9-E0B1425B7B2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E37944B1-5A9A-45C6-AE84-7A9E46D1A114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E37944B1-5A9A-45C6-AE84-7A9E46D1A114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E37944B1-5A9A-45C6-AE84-7A9E46D1A114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E37944B1-5A9A-45C6-AE84-7A9E46D1A114}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

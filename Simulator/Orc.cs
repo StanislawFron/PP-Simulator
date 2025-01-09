@@ -10,7 +10,7 @@ public class Orc : Creature
         init => rage = Validator.Limiter(value, 0, 10);
     }
 
-    public Orc(string name, int level, int rage) : base(name, level)
+    public Orc(string name, int level = 1, int rage = 1) : base(name, level)
     {
         Rage = rage;
     }

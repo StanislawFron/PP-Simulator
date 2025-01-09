@@ -57,7 +57,7 @@ public class Simulation
         get
         {
             if (Finished) throw new InvalidOperationException("Symulacja dobiegła końca!");
-            return Moves[currentMoveNameIndex].ToString();
+            return DirectionParser.Parse(Moves[currentMoveNameIndex].ToString())[0].ToString().ToLower();
         }
     }
 

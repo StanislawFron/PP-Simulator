@@ -55,4 +55,7 @@ public abstract class Map
     }
 
     public abstract void Remove(Creature creature, Point point);
+
+    public abstract List<Creature> At(Point point);
+    public abstract List<Creature> At(int x, int y);
 }

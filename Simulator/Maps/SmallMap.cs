@@ -27,7 +27,7 @@ public abstract class SmallMap : Map
         }
     }
 
-    public List<Creature> At(Point point)
+    public override List<Creature> At(Point point)
     {
         if (creaturesAtPoints.ContainsKey(point))
         {
@@ -36,7 +36,7 @@ public abstract class SmallMap : Map
         return new List<Creature>();
     }
 
-    public List<Creature> At(int x, int y)
+    public override List<Creature> At(int x, int y)
     {
         return At(new Point(x, y));
     }

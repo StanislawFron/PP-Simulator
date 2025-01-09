@@ -6,7 +6,7 @@ public abstract class Creature
 {
     private string name = "Unknown";
     private Map? currentMap;
-    private Point? position;
+    public Point? position;
 
     public abstract int Power { get; }
     public string Name
