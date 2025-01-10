@@ -7,13 +7,13 @@ public abstract class Creature : IMappable
     private string name = "Unknown";
     private Map? currentMap;
     private Point? position;
+    public virtual char Symbol => 'C';
 
     public abstract int Power { get; }
     public string Name
     {
         get => name;
         init => name = Validator.Shortener(value, 3, 25, '#');
-
     }
 
     private int level = 1;
@@ -52,7 +52,7 @@ public abstract class Creature : IMappable
         currentMap.Add(this, startPosition);
     }
 
-    public void Go(Direction direction)
+    public string Go(Direction direction)
     {
         if (currentMap == null || Position == null)
         {
@@ -63,11 +63,12 @@ public abstract class Creature : IMappable
         if (currentMap.Exist(nextPosition))
         {
             currentMap.Move(this, Position.Value, nextPosition);
-            Position = nextPosition; // Aktualizacja przez właściwość.
+            Position = nextPosition;
+            return $"{direction.ToString().ToLower()}";
         }
-    }
 
-    // Implementacja właściwości Position z interfejsu IMappable.
+        return "Nie można się poruszyć.";
+    }
     public Point? Position
     {
         get => position;

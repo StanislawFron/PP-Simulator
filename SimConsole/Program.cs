@@ -10,19 +10,25 @@ internal class Program
     {
         int gameTurn = 1;
         Console.OutputEncoding = Encoding.UTF8;
-        SmallSquareMap map = new(5);
+        SmallSquareMap map = new(10);
         List<IMappable> mapObjects = new()
         {
             new Orc("Gorbag"),
-            new Elf("Elandor")
+            new Elf("Elandor"),
+            new Animals { Description = "Rabbits" },
+            new Birds { Description = "Eagles", CanFly = true },
+            new Birds { Description = "Ostriches", CanFly = false }
         };
         List<Point> points = new()
         {
             new(2, 2),
-            new(3, 1)
+            new(3, 1),
+            new(3, 3),
+            new(4, 4),
+            new(5, 5)
         };
 
-        string moves = "dlrludlru";
+        string moves = "dlrludlrullrrud";
         Simulation simulation = new(map, mapObjects, points, moves);
         MapVisualizer mapVisualizer = new(simulation.Map);
         Console.WriteLine("SIMULATION!");

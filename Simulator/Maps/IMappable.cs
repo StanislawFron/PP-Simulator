@@ -10,7 +10,7 @@ public interface IMappable
     /// <summary>
     /// Porusza obiektem w danym kierunku.
     /// </summary>
-    void Go(Direction direction);
+    string Go(Direction direction);
 
     /// <summary>
     /// Zwraca pozycję obiektu.
@@ -21,4 +21,5 @@ public interface IMappable
     /// Zwraca nazwę obiektu.
     /// </summary>
     string Name { get; }
+    char Symbol { get; }
 }
