@@ -1,7 +1,8 @@
 ﻿namespace Simulator.Maps;
 public abstract class SmallMap : Map
 {
-    private readonly Dictionary<Point, List<Creature>> creaturesAtPoints = new();
+    private readonly Dictionary<Point, List<IMappable>> itemsAtPoints = new();
+
     protected SmallMap(int sizeX, int sizeY) : base(sizeX, sizeY)
     {
         if (sizeX > 20 || sizeY > 20)
