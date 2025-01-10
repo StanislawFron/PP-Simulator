@@ -11,7 +11,7 @@ public class Simulation
     /// <summary>
     /// Creatures moving on the map.
     /// </summary>
-    public List<Creature> Creatures { get; }
+    public List<IMappable> Creatures { get; }
 
     /// <summary>
     /// Starting positions of creatures.
@@ -37,7 +37,7 @@ public class Simulation
     /// <summary>
     /// Creature which will be moving current turn.
     /// </summary>
-    public Creature CurrentCreature {
+    public IMappable CurrentCreature {
         get
         {
             if (Finished) throw new InvalidOperationException("Symulacja dobiegła końca!");
@@ -68,8 +68,7 @@ public class Simulation
     /// if number of creatures differs from 
     /// number of starting positions.
     /// </summary>
-    public Simulation(Map map, List<Creature> creatures,
-        List<Point> positions, string moves)
+    public Simulation(Map map, List<IMappable> creatures, List<Point> positions, string moves)
     {
         if (creatures == null || creatures.Count == 0)
         {
@@ -100,7 +99,7 @@ public class Simulation
         if (Finished)
             throw new InvalidOperationException("Symulacja dobiegła końca!");
 
-        Creature creature = CurrentCreature;
+        IMappable creature = CurrentCreature;
         Direction direction = DirectionParser.Parse(Moves)[currentMoveNameIndex];
 
         try

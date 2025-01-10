@@ -1,7 +1,7 @@
 ﻿namespace Simulator.Maps;
 public abstract class SmallMap : Map
 {
-    private readonly Dictionary<Point, List<IMappable>> itemsAtPoints = new();
+    private readonly Dictionary<Point, List<IMappable>> creaturesAtPoints = new();
 
     protected SmallMap(int sizeX, int sizeY) : base(sizeX, sizeY)
     {
@@ -9,17 +9,17 @@ public abstract class SmallMap : Map
             throw new ArgumentOutOfRangeException("Rozmiar mapy musi mieścić się w granicach od 5 do 20 punktow!");
     }
 
-    public override void Add(Creature creature, Point point)
+    public override void Add(IMappable creature, Point point)
     {
         if (!Exist(point)) throw new ArgumentException("Punkt nie znajduje się na mapie!");
         if (!creaturesAtPoints.ContainsKey(point))
         {
-            creaturesAtPoints[point] = new List<Creature>();
+            creaturesAtPoints[point] = new List<IMappable>();
         }
         creaturesAtPoints[point].Add(creature);
     }
 
-    public override void Remove(Creature creature, Point point)
+    public override void Remove(IMappable creature, Point point)
     {
         if (creaturesAtPoints.TryGetValue(point, out var creatures))
         {
@@ -28,16 +28,16 @@ public abstract class SmallMap : Map
         }
     }
 
-    public override List<Creature> At(Point point)
+    public override List<IMappable> At(Point point)
     {
         if (creaturesAtPoints.ContainsKey(point))
         {
             return creaturesAtPoints[point];
         }
-        return new List<Creature>();
+        return new List<IMappable>();
     }
 
-    public override List<Creature> At(int x, int y)
+    public override List<IMappable> At(int x, int y)
     {
         return At(new Point(x, y));
     }

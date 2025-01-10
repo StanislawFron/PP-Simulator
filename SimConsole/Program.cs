@@ -11,20 +11,29 @@ internal class Program
         int gameTurn = 1;
         Console.OutputEncoding = Encoding.UTF8;
         SmallSquareMap map = new(5);
-        List<Creature> creatures = [new Orc("Gorbag"), new Elf("Elandor")];
-        List<Point> points = [new(2, 2), new(3, 1)];
+        List<IMappable> mapObjects = new()
+        {
+            new Orc("Gorbag"),
+            new Elf("Elandor")
+        };
+        List<Point> points = new()
+        {
+            new(2, 2),
+            new(3, 1)
+        };
+
         string moves = "dlrludlru";
-        Simulation simulation = new(map, creatures, points, moves);
+        Simulation simulation = new(map, mapObjects, points, moves);
         MapVisualizer mapVisualizer = new(simulation.Map);
         Console.WriteLine("SIMULATION!");
         Console.WriteLine("\nStarting positions:");
         mapVisualizer.Draw();
-        while (simulation.Finished == false)
+        while (!simulation.Finished)
         {
-            Console.WriteLine("Wciśnij dowolny przycisk by kontynuować...");
+            Console.WriteLine("Wciśnij dowolny przycisk, by kontynuować...");
             Console.ReadKey();
             Console.WriteLine($"\nTura gry: {gameTurn}");
-            Console.WriteLine($"{simulation.CurrentCreature} {simulation.CurrentCreature.position} idzie w kierunku {simulation.CurrentMoveName}:");
+            Console.WriteLine($"{simulation.CurrentCreature} {simulation.CurrentCreature.Position} idzie w kierunku {simulation.CurrentMoveName}:");
             simulation.Turn();
             mapVisualizer.Draw();
             gameTurn++;

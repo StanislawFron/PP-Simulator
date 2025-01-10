@@ -2,11 +2,11 @@
 
 namespace Simulator;
 
-public abstract class Creature
+public abstract class Creature : IMappable
 {
     private string name = "Unknown";
     private Map? currentMap;
-    public Point? position;
+    private Point? position;
 
     public abstract int Power { get; }
     public string Name
@@ -48,22 +48,29 @@ public abstract class Creature
     public void AddToMap(Map map, Point startPosition)
     {
         currentMap = map;
-        position = startPosition;
-        currentMap.Add(this, startPosition); // Dodaj stworzenie na mapę
+        Position = startPosition;
+        currentMap.Add(this, startPosition);
     }
 
     public void Go(Direction direction)
     {
-        if (currentMap == null || position == null)
+        if (currentMap == null || Position == null)
         {
             throw new InvalidOperationException("Blad! - Stwor nie ma jeszcze przydzielonej mapy.");
         }
 
-        var nextPosition = currentMap.Next(position.Value, direction);
+        var nextPosition = currentMap.Next(Position.Value, direction);
         if (currentMap.Exist(nextPosition))
         {
-            currentMap.Move(this, position.Value, nextPosition);
-            position = nextPosition;
+            currentMap.Move(this, Position.Value, nextPosition);
+            Position = nextPosition; // Aktualizacja przez właściwość.
         }
+    }
+
+    // Implementacja właściwości Position z interfejsu IMappable.
+    public Point? Position
+    {
+        get => position;
+        private set => position = value;
     }
 }

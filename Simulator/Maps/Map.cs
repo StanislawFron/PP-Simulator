@@ -46,16 +46,15 @@ public abstract class Map
     /// <returns>Next point.</returns>
     public abstract Point NextDiagonal(Point p, Direction d);
 
-    public abstract void Add(Creature creature, Point point);
+    public abstract void Add(IMappable creature, Point point);
 
-    public void Move(Creature creature, Point pos, Point nextpos)
+    public void Move(IMappable creature, Point pos, Point nextpos)
     {
         Remove(creature, pos);
         Add(creature, nextpos);
     }
 
-    public abstract void Remove(Creature creature, Point point);
-
-    public abstract List<Creature> At(Point point);
-    public abstract List<Creature> At(int x, int y);
+    public abstract void Remove(IMappable creature, Point point);
+    public abstract List<IMappable> At(Point point);
+    public abstract List<IMappable> At(int x, int y);
 }
