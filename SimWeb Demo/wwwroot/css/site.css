@@ -1,0 +1,137 @@
+body {
+    background-color: #f9f9f9;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+main {
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+header {
+    display: flex;
+    background-color: #4a4a4a;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    header h1 {
+        color: #ffcc00;
+        font-size: 28px;
+        margin-left: 15px;
+    }
+
+    header nav {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 18px;
+    }
+
+nav a {
+    margin-left: 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+    nav a:hover {
+        color: #ffcc00;
+    }
+
+.control-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+    .control-panel button {
+        background-color: #ffcc00;
+        border: none;
+        color: #333;
+        padding: 12px 24px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        .control-panel button:hover {
+            background-color: #ffaa00;
+            transform: scale(1.05);
+        }
+
+    .control-panel h1 {
+        margin: 0 20px;
+        color: #333;
+    }
+
+.map-container {
+    display: grid;
+    justify-content: center;
+}
+
+.grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    height: 120px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+}
+
+    .grid-item img {
+        height: 120px;
+        width:150px;
+        object-fit: cover;
+        object-position: top;
+    }
+
+.info-container {
+    padding: 15px;
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+    .info-container p {
+        color: #444;
+        margin: 10px 0;
+    }
+
+    .info-container img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+.log-container p {
+    margin: 10px 0;
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.5;
+}
