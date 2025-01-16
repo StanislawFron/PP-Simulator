@@ -37,7 +37,8 @@ public class Simulation
     /// <summary>
     /// Creature which will be moving current turn.
     /// </summary>
-    public IMappable CurrentCreature {
+    public IMappable CurrentCreature
+    {
         get
         {
             if (Finished) throw new InvalidOperationException("Symulacja dobiegła końca!");
@@ -45,13 +46,11 @@ public class Simulation
         }
     }
 
-
     private int currentMoveNameIndex = 0;
 
     /// <summary>
     /// Lowercase name of direction which will be used in current turn.
     /// </summary>
-
     public string CurrentMoveName
     {
         get
@@ -95,15 +94,39 @@ public class Simulation
     /// Makes one move of current creature in current direction.
     /// Throw error if simulation is finished.
     /// </summary>
-    public void Turn() {
+    public void Turn()
+    {
         if (Finished)
             throw new InvalidOperationException("Symulacja dobiegła końca!");
 
         IMappable creature = CurrentCreature;
         Direction direction = DirectionParser.Parse(Moves)[currentMoveNameIndex];
+        if (creature.Position == null)
+        {
+            throw new InvalidOperationException("Pozycja stworzenia jest pusta.");
+        }
+
+        Point nextPosition = Map.Next(creature.Position.Value, direction);
 
         try
         {
+            if (Map.Exist(nextPosition))
+            {
+                var creaturesAtNextPos = Map.At(nextPosition);
+
+                if (creaturesAtNextPos.Count > 1)
+                {
+                    // Resolve combat between creatures at next position
+                    for (int i = 0; i < creaturesAtNextPos.Count; i++)
+                    {
+                        for (int j = i + 1; j < creaturesAtNextPos.Count; j++)
+                        {
+                            ResolveCombat(creaturesAtNextPos[i], creaturesAtNextPos[j]);
+                        }
+                    }
+                }
+            }
+
             creature.Go(direction);
         }
         catch (Exception exception)
@@ -111,7 +134,6 @@ public class Simulation
             throw new InvalidOperationException(
                 $"Wystąpił błąd przy próbie poruszenia postacią: {creature}. Szczegóły: {exception.Message}", exception);
         }
-
 
         currentMoveNameIndex++;
         if (currentMoveNameIndex >= Moves.Length)
@@ -124,5 +146,39 @@ public class Simulation
         {
             currentCreatureIndex = 0;
         }
+    }
+
+    private void ResolveCombat(IMappable creature1, IMappable creature2)
+    {
+        Console.WriteLine("Combat");
+        int power1 = creature1.Power;
+        int power2 = creature2.Power;
+
+        if (power1 > power2)
+        {
+            // Creature1 wins, decrease its opponent's rage/agility by 1
+            if (creature2 is Orc)
+            {
+                ((Orc)creature2).winBattle();
+            }
+            else if (creature2 is Elf)
+            {
+                ((Elf)creature2).winBattle();
+            }
+        }
+        else if (power1 < power2)
+        {
+            // Creature2 wins, decrease its opponent's rage/agility by 1
+            if (creature1 is Orc)
+            {
+                ((Orc)creature1).winBattle();
+            }
+            else if (creature1 is Elf)
+            {
+                ((Elf)creature1).winBattle();
+            }
+        }
+
+        // If powers are equal, no change
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Simulator;
+﻿using System;
+
+namespace Simulator;
 public class Elf : Creature
 {
     private int agility = 1;
@@ -26,6 +28,11 @@ public class Elf : Creature
         {
             agility++;
         }
+    }
+
+    public void winBattle()
+    {
+        agility += 2;
     }
 
     public override string Greeting() =>

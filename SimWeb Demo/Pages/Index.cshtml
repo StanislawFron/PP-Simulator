@@ -18,6 +18,23 @@
         if (Model.Turn != 0)
         {
             var log = $"{Model.CurrentLog.Mappable} goes {Model.CurrentLog.Move}";
+            var objectType = "";
+
+            var index = log.IndexOf(':');
+            if (index >= 0)
+            {
+                objectType = log.Substring(0, index);
+            }
+
+            if(objectType == "TOWER")
+            {
+                log = $"{Model.CurrentLog.Mappable} leveled up";
+            }
+            else
+            {
+                log = $"{Model.CurrentLog.Mappable} goes {Model.CurrentLog.Move}";
+            }
+
             <p>@log</p>
         }
         else
@@ -44,6 +61,10 @@
                     else if (Model.CurrentLog.Symbols[cords] == 'X')
                     {
                         path = $"creatures/All.png";
+                    }
+                    else if(Model.CurrentLog.Symbols[cords] == 'W')
+                    {
+                        path = $"buildings/Tower.png";
                     }
                     else
                     {

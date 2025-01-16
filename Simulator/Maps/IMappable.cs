@@ -21,5 +21,14 @@ public interface IMappable
     /// Zwraca nazwę obiektu.
     /// </summary>
     string Name { get; }
+
+    /// <summary>
+    /// Zwraca symbol obiektu.
+    /// </summary>
     char Symbol { get; }
+
+    /// <summary>
+    /// Moc obiektu (opcjonalne pole).
+    /// </summary>
+    int Power { get; }
 }

@@ -8,11 +8,13 @@ public class SimulationTurnLog
     /// CurrentMappable.ToString()
     /// </summary>
     public required string Mappable { get; init; }
+
     /// <summary>
     /// Text representation of move in this turn.
     /// CurrentMoveName.ToString();
     /// </summary>
     public required string Move { get; init; }
+
     /// <summary>
     /// Dictionary of IMappable.Symbol on the map in this turn.
     /// </summary>

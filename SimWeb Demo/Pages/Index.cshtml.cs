@@ -19,16 +19,20 @@ public class IndexModel : PageModel
             new Elf("Elandor"),
             new Animals{ Description = "Rabbits", Size = 6 },
             new Birds { Description = "Eagles", Size = 4, CanFly = true },
-            new Birds { Description = "Ostriches", Size = 5, CanFly = false }
+            new Birds { Description = "Ostriches", Size = 5, CanFly = false },
+            new Tower { Description = "Watchtower", Level = 1 },
+            new Tower { Description = "Defense Tower", Level = 2 }
             ];
         List<Point> points = [
             new(2, 2),
             new(3, 1),
             new(3, 2),
             new(6, 5),
-            new(5, 5)
+            new(5, 5),
+            new(4, 4),
+            new(7, 7)
             ];
-        string moves = "rrlluuddrludllr";
+        string moves = "rrllrruulludllrr";
         Simulation = new(map, creatures, points, moves);
         SimHistory = new SimulationHistory(Simulation);
         CurrentLog = SimHistory.TurnLogs[Turn];

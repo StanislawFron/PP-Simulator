@@ -28,6 +28,11 @@ public class Orc : Creature
         }
     }
 
+    public void winBattle()
+    {
+        rage += 2;
+    }
+
     public override string Greeting() =>
         $"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.";
 

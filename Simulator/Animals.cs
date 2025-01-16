@@ -5,6 +5,8 @@ namespace Simulator;
 public class Animals : IMappable
 {
     private string description = "Unknown";
+
+    public int Power { get; private set; } = 0;
     public uint Size { get; set; } = 3;
     public Map? currentMap { get; private set; } = null;
 

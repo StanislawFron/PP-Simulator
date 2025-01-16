@@ -50,7 +50,7 @@ public class SimulationHistory
                     }
                 }
             }
-            TurnLogs.Add(new SimulationTurnLog { Mappable = currentMappable.ToString(), Move = currentMove, Symbols = symbolsPos });
+            TurnLogs.Add(new SimulationTurnLog { Mappable = currentMappable.ToString(), Move = currentMove, Symbols = symbolsPos});
         }
     }
 }
