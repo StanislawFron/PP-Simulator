@@ -15,8 +15,8 @@ public class IndexModel : PageModel
     {
         SmallTorusMap map = new(SizeX, SizeY);
         List<IMappable> creatures = [
-            new Orc("Gorbag"),
-            new Elf("Elandor"),
+            new Orc("Gorbag", 2, 5),
+            new Elf("Elandor", 3, 3),
             new Animals{ Description = "Rabbits", Size = 6 },
             new Birds { Description = "Eagles", Size = 4, CanFly = true },
             new Birds { Description = "Ostriches", Size = 5, CanFly = false },
@@ -26,13 +26,13 @@ public class IndexModel : PageModel
         List<Point> points = [
             new(2, 2),
             new(3, 1),
-            new(3, 2),
+            new(3, 3),
             new(6, 5),
             new(5, 5),
             new(4, 4),
             new(7, 7)
             ];
-        string moves = "rrllrruulludllrr";
+        string moves = "rrllrruulludllrl";
         Simulation = new(map, creatures, points, moves);
         SimHistory = new SimulationHistory(Simulation);
         CurrentLog = SimHistory.TurnLogs[Turn];

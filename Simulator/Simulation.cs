@@ -110,24 +110,14 @@ public class Simulation
 
         try
         {
-            if (Map.Exist(nextPosition))
-            {
-                var creaturesAtNextPos = Map.At(nextPosition);
-
-                if (creaturesAtNextPos.Count > 1)
-                {
-                    // Resolve combat between creatures at next position
-                    for (int i = 0; i < creaturesAtNextPos.Count; i++)
-                    {
-                        for (int j = i + 1; j < creaturesAtNextPos.Count; j++)
-                        {
-                            ResolveCombat(creaturesAtNextPos[i], creaturesAtNextPos[j]);
-                        }
-                    }
-                }
-            }
-
             creature.Go(direction);
+
+            var mapCell = Map.At(nextPosition);
+
+            if (Map.At(nextPosition).Count > 1)
+            {
+                ResolveCombat(mapCell[0], mapCell[1]);
+            }
         }
         catch (Exception exception)
         {
@@ -150,32 +140,33 @@ public class Simulation
 
     private void ResolveCombat(IMappable creature1, IMappable creature2)
     {
-        Console.WriteLine("Combat");
         int power1 = creature1.Power;
         int power2 = creature2.Power;
 
         if (power1 > power2)
         {
-            // Creature1 wins, decrease its opponent's rage/agility by 1
             if (creature2 is Orc)
             {
                 ((Orc)creature2).winBattle();
+                Console.WriteLine("Orc won");
             }
             else if (creature2 is Elf)
             {
                 ((Elf)creature2).winBattle();
+                Console.WriteLine("Elf won");
             }
         }
         else if (power1 < power2)
         {
-            // Creature2 wins, decrease its opponent's rage/agility by 1
             if (creature1 is Orc)
             {
                 ((Orc)creature1).winBattle();
+                Console.WriteLine("Orc won");
             }
             else if (creature1 is Elf)
             {
                 ((Elf)creature1).winBattle();
+                Console.WriteLine("Elf won");
             }
         }
 
